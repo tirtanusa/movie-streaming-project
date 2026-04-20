@@ -84,7 +84,7 @@ export const getWatchProviders = async (movieId) => {
 export const getMoviesByGenre = async (genreId, page = 1) => {
   try {
     const response = await tmdb.get(
-      `/discover/movie?with_genres=${genreId}&page=${page}&include_adult=false`,
+      `/discover/movie?with_genres=${genreId}&page=${page}&include_adult=false&sort_by=rating.desc`,
     );
     return response.data.results;
   } catch (error) {
