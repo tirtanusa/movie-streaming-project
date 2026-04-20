@@ -1,4 +1,4 @@
-import { tmdb } from "./tmdb";
+import tmdb from "./tmdb";
 
 export const getPopularMovies = async (page = 1) => {
   try {
