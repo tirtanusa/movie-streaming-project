@@ -32,6 +32,20 @@ const Home = () => {
   return (
     <>
       {nowPlayingMovies[0] && <HeroSection movie={nowPlayingMovies[0]} />}
+      <h1 className="mx-6">Top Rated Movies</h1>
+      <div className="flex gap-3 overflow-x-auto mx-4">
+        {" "}
+        {topRatedMovies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            rating={movie.vote_average}
+            genres={movie.genre_ids}
+            img_path={movie.backdrop_path}
+          />
+        ))}
+      </div>
       <h1 className="mx-6">Popular Movies</h1>
       <div className="flex gap-3 overflow-x-auto mx-4">
         {" "}
