@@ -32,6 +32,45 @@ const Home = () => {
   return (
     <>
       {nowPlayingMovies[0] && <HeroSection movie={nowPlayingMovies[0]} />}
+      <div className="flex justify-between">
+        <div className="genreButton">
+          <p className="text-white">Action</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Animation</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Sci-Fi</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Fantasy</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Crime</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Family</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Thriller</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Adventure</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Drama</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">Romance</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">History</p>
+        </div>
+        <div className="genreButton">
+          <p className="text-white">War</p>
+        </div>
+      </div>
+
       <h1 className="mx-6">Top Rated Movies</h1>
       <div className="flex gap-3 overflow-x-auto mx-4">
         {" "}

@@ -19,7 +19,7 @@ const HeroSection = (props) => {
   return (
     <>
       <div>
-        <div className="absolute z-10 w-1/5 h-1/2 my-auto left-0 top-10 flex flex-col gap-4 justify-center items-start  bg-transparent px-12">
+        <div className="absolute z-10 w-1/5 h-1/2 my-auto left-0 top-10 flex flex-col gap-4 justify-center items-start bg-transparent px-12">
           <img
             src={
               movieImagesPath ? (
@@ -29,9 +29,9 @@ const HeroSection = (props) => {
               )
             }
             alt={props.movie.title}
-            className="w-auto h-40 object-contain bg-transparent"
+            className="w-auto h-40 object-contain bg-transparent mx-auto"
           />
-          <p className="text-justify bg-transparent text-white">
+          <p className="text-justify bg-transparent text-white text-sm">
             {props.movie.overview}
           </p>
           <div className="flex bg-transparent gap-4">
@@ -39,11 +39,13 @@ const HeroSection = (props) => {
             <button>Trailer</button>
           </div>
         </div>
-        <img
-          src={`https://image.tmdb.org/t/p/original/${props.movie.backdrop_path}`}
-          alt={props.movie.title}
-          className="w-full h-[500px] object-cover rounded-b-lg mx-4 mb-4"
-        />
+        <div className="px-6">
+          <img
+            src={`https://image.tmdb.org/t/p/original/${props.movie.backdrop_path}`}
+            alt={props.movie.title}
+            className="w-full h-125 object-cover rounded-b-lg mb-4"
+          />
+        </div>
       </div>
     </>
   );
