@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tailwind-scrollbar-hide/v4";
-@import url("https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&display=swap");
 
 @theme {
   --color-bgcolor: #0f0f0f;
