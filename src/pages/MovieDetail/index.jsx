@@ -6,10 +6,14 @@ import {
   getMoviesCast,
   getMovieDetails,
   getMovieImages,
+  getWatchProviders,
 } from "../../api/movieService";
 import { useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
 
-const MovieDetail = (props) => {
+const MovieDetail = () => {
   const { id } = useParams();
   const [movieCasts, setMovieCasts] = useState([]);
   const [movieLogo, setMovieImages] = useState("");
@@ -19,6 +23,7 @@ const MovieDetail = (props) => {
     genres: "",
     rating: "",
     overview: "",
+    providers: [],
   });
 
   useEffect(() => {
@@ -26,11 +31,13 @@ const MovieDetail = (props) => {
 
     const fetchDetails = async () => {
       try {
-        const [castData, movieData, movieImage] = await Promise.all([
-          getMoviesCast(id),
-          getMovieDetails(id),
-          getMovieImages(id),
-        ]);
+        const [castData, movieData, movieImage, movieProviders] =
+          await Promise.all([
+            getMoviesCast(id),
+            getMovieDetails(id),
+            getMovieImages(id),
+            getWatchProviders(id),
+          ]);
         setMovieCasts(castData.cast.slice(0, 10));
         setMovieDetails({
           year: movieData.release_date?.substring(0, 4) || "",
@@ -46,6 +53,8 @@ const MovieDetail = (props) => {
           director:
             castData.crew.find((p) => p.job === "Director")?.name || "Unknown",
           tagline: movieData.tagline,
+          providers:
+            movieProviders.results?.ID?.flatrate?.map((g) => g.logo_path) || [],
         });
         setMovieImages(
           movieImage.logos.find((logo) => logo.iso_639_1 === "en")?.file_path ||
@@ -79,7 +88,7 @@ const MovieDetail = (props) => {
           </div>
         )}
 
-        <div className="absolute bottom-0 left-0 flex items-end gap-6 px-8 pb-6 z-20">
+        <div className="absolute bottom-0 left-0 flex items-end gap-6 px-8 pb-6 z-20 h-75">
           {/* poster */}
           {movieDetails.poster_path ? (
             <img
@@ -98,7 +107,7 @@ const MovieDetail = (props) => {
             <img
               src={`https://image.tmdb.org/t/p/w780/${movieLogo}`}
               alt={movieDetails.title}
-              className="w-100 h-30"
+              className="w-100 h-auto"
             />
           ) : (
             <div className="w-100 text-white font-bold font-logofont text-3xl">
@@ -136,25 +145,46 @@ const MovieDetail = (props) => {
         </p>
         <p className="font-light italic">{movieDetails.tagline}</p>
         <p className="text-justify">{movieDetails.overview}</p>
-      </section>
-      <section className="my-20 px-8 ml-60">
-        <h1>Casts</h1>
-        <div className="flex gap-5 overflow-x-auto mt-4">
-          {movieCasts.map((movie) => (
-            <div className="grid-cols-10 items-center justify-center">
-              <div
-                key={movie.id}
-                className="rounded-full w-25 h-25 bg-white overflow-clip shrink-0 mx-auto"
-              >
-                <img
-                  src={`https://image.tmdb.org/t/p/w780/${movie.profile_path}`}
-                  alt={movie.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-center">{movie.name}</p>
-            </div>
+        <p className="font-extralight">Available On</p>
+        <div className="flex items-center gap-3">
+          {movieDetails.providers.map((logoPath, index) => (
+            <img
+              key={index}
+              src={`https://image.tmdb.org/t/p/w1280/${logoPath}`}
+              alt="Available on"
+              className="w-20 h-20 rounded-full"
+            />
           ))}
+        </div>
+      </section>
+      <section className="my-20 px-8 ml-60 w-1/2">
+        <h1>Casts</h1>
+        <div className="mt-4">
+          <Swiper
+            modules={[Navigation]}
+            navigation
+            spaceBetween={12}
+            slidesPerView="auto"
+            className="w-full px-4"
+          >
+            {movieCasts.map((movie) => (
+              <SwiperSlide key={movie.id} style={{ width: "auto" }}>
+                <div className="grid-cols-10 items-center justify-center">
+                  <div
+                    key={movie.id}
+                    className="rounded-full w-25 h-25 bg-white overflow-clip shrink-0 mx-auto"
+                  >
+                    <img
+                      src={`https://image.tmdb.org/t/p/w780/${movie.profile_path}`}
+                      alt={movie.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="text-center">{movie.name}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </section>
     </>
