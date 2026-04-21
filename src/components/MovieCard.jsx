@@ -36,7 +36,7 @@ const MovieCard = (props) => {
   return (
     <>
       <div className="relative w-fit shrink-0 hover:scale-105 duration-300 transition-transform py-4 cursor-pointer">
-        <section className="absolute z-10 bg-black w-42 h-67 rounded-lg opacity-0 hover:opacity-80  transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
+        <section className="absolute z-10 bg-black w-50 h-75 rounded-lg opacity-0 hover:opacity-90  transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
           <div className="flex items-center justify-between bg-transparent overflow-x-auto">
             <div className="flex flex-col items-center gap-2 overflow-x-hidden bg-transparent ">
               <p className="text-sm bg-transparent">{details.year}</p>
@@ -50,9 +50,9 @@ const MovieCard = (props) => {
           </div>
         </section>
 
-        <section className="absolute bg-transparent">
+        <section className="absolute z-20 bg-transparent">
           <div
-            className={`text-white flex items-center w-10 h-10 border-2 mx-2 my-2 rounded-full ${Number(props.rating) >= 7 ? "border-green-500" : Number(props.rating) > 5 ? "border-yellow-500" : "border-red-500"} text-center justify-center-safe p-auto`}
+            className={`text-white bg-black flex items-center w-10 h-10 border-2 mx-2 my-2 rounded-full ${Number(props.rating) >= 7 ? "border-green-500" : Number(props.rating) > 5 ? "border-yellow-500" : "border-red-500"} text-center justify-center-safe p-auto`}
           >
             {Number(props.rating).toFixed(1)}
           </div>
