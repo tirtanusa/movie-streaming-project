@@ -38,15 +38,6 @@ const Home = () => {
   }, []);
   return (
     <>
-      {/* <div
-        data-carousel='{"loadingClasses": "opacity-0","dotsItemClasses": "carousel-box carousel-active:bg-primary"}'
-        className="relative  w-full"
-      >
-        <div className="carousel">
-          {nowPlayingMovies[0] && <HeroSection movie={nowPlayingMovies[0]} />}
-        </div>
-      </div> */}
-
       <HeroSection movies={nowPlayingMovies.slice(0, 10)} />
 
       <section className="flex flex-col  mx-6">

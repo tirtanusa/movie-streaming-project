@@ -91,3 +91,12 @@ export const getMoviesByGenre = async (genreId, page = 1) => {
     console.error("Error fetching movies by genre:", error);
   }
 };
+
+export const getMoviesCast = async (movieId) => {
+  try {
+    const response = await tmdb.get(`/movie/${movieId}/credits?language=en-US`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching cast list :", error);
+  }
+};
