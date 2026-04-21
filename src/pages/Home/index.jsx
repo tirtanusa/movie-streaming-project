@@ -37,9 +37,18 @@ const Home = () => {
   }, []);
   return (
     <>
-      {nowPlayingMovies[0] && <HeroSection movie={nowPlayingMovies[0]} />}
+      {/* <div
+        data-carousel='{"loadingClasses": "opacity-0","dotsItemClasses": "carousel-box carousel-active:bg-primary"}'
+        className="relative  w-full"
+      >
+        <div className="carousel">
+          {nowPlayingMovies[0] && <HeroSection movie={nowPlayingMovies[0]} />}
+        </div>
+      </div> */}
 
-      <div className="flex gap-3 overflow-x-auto mx-4">
+      <HeroSection movies={nowPlayingMovies.slice(0, 10)} />
+
+      <div className="flex gap-3 overflow-x-auto mx-4 scrollbar-hide overflow-y-hidden">
         {" "}
         {movieByGenre.map((movie) => (
           <MovieCard
@@ -48,13 +57,13 @@ const Home = () => {
             title={movie.title}
             rating={movie.vote_average}
             genres={movie.genre_ids}
-            img_path={movie.backdrop_path}
+            img_path={movie.poster_path}
           />
         ))}
       </div>
 
       <h1 className="mx-6">Top Rated Movies</h1>
-      <div className="flex gap-3 overflow-x-auto mx-4">
+      <div className="flex gap-3 overflow-x-auto mx-4 scrollbar-hide overflow-y-hidden">
         {" "}
         {topRatedMovies.map((movie) => (
           <MovieCard
@@ -63,12 +72,12 @@ const Home = () => {
             title={movie.title}
             rating={movie.vote_average}
             genres={movie.genre_ids}
-            img_path={movie.backdrop_path}
+            img_path={movie.poster_path}
           />
         ))}
       </div>
       <h1 className="mx-6">Popular Movies</h1>
-      <div className="flex gap-3 overflow-x-auto mx-4">
+      <div className="flex gap-3 overflow-x-auto mx-4 scrollbar-hide overflow-y-hidden">
         {" "}
         {popularMovies.map((movie) => (
           <MovieCard
@@ -77,7 +86,7 @@ const Home = () => {
             title={movie.title}
             rating={movie.vote_average}
             genres={movie.genre_ids}
-            img_path={movie.backdrop_path}
+            img_path={movie.poster_path}
           />
         ))}
       </div>
