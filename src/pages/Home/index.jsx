@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import MovieCard from "../../components/MovieCard";
 import HeroSection from "./HeroSection";
 import {
@@ -51,19 +52,22 @@ const Home = () => {
         >
           {topRatedMovies.map((movie) => (
             <SwiperSlide key={movie.id} style={{ width: "auto" }}>
-              <MovieCard
-                id={movie.id}
-                title={movie.title}
-                rating={movie.vote_average}
-                genres={movie.genre_ids}
-                img_path={movie.poster_path}
-              />
+              <Link to={`/movie/${movie.id}`}>
+                <MovieCard
+                  id={movie.id}
+                  title={movie.title}
+                  rating={movie.vote_average}
+                  genres={movie.genre_ids}
+                  img_path={movie.poster_path}
+                />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
       </section>
       <section className="flex flex-col  mx-6">
         <h1 className="">Popular Movies</h1>
+
         <Swiper
           modules={[Navigation]}
           navigation
@@ -73,13 +77,15 @@ const Home = () => {
         >
           {popularMovies.map((movie) => (
             <SwiperSlide key={movie.id} style={{ width: "auto" }}>
-              <MovieCard
-                id={movie.id}
-                title={movie.title}
-                rating={movie.vote_average}
-                genres={movie.genre_ids}
-                img_path={movie.poster_path}
-              />
+              <Link to={`/movie/${movie.id}`}>
+                <MovieCard
+                  id={movie.id}
+                  title={movie.title}
+                  rating={movie.vote_average}
+                  genres={movie.genre_ids}
+                  img_path={movie.poster_path}
+                />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

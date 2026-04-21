@@ -1,7 +1,7 @@
 //rnfe
 
 import { useState, useEffect } from "react";
-import { Play } from "lucide-react";
+import { Play, Share } from "lucide-react";
 import {
   getMoviesCast,
   getMovieDetails,
@@ -38,11 +38,14 @@ const MovieDetail = (props) => {
           genres: movieData.genres
             .slice(0, 3)
             .map((g) => g.name)
-            .join(", "),
+            .join(" • "),
           rating: Number(movieData.vote_average).toFixed(1) || "",
           overview: movieData.overview,
           backdrop_path: movieData.backdrop_path,
           poster_path: movieData.poster_path,
+          director:
+            castData.crew.find((p) => p.job === "Director")?.name || "Unknown",
+          tagline: movieData.tagline,
         });
         setMovieImages(
           movieImage.logos.find((logo) => logo.iso_639_1 === "en")?.file_path ||
@@ -104,43 +107,52 @@ const MovieDetail = (props) => {
           )}
         </div>
       </section>
-      <section className="flex flex-col px-8 w-1/2 ml-60">
-        <p className="text-white shrink-0 bg-transparent">
-          {movieDetails.genres}
-        </p>
-        <button className="flex items-center justify-center text-white">
-          <Play className="w-5 h-5 mr-2  bg-transparent" />
-          Trailer
-        </button>
+      <section className="flex flex-col px-8 w-1/2 ml-60  gap-6">
+        <p className=" shrink-0 bg-transparent">{movieDetails.genres}</p>
+        <div className="flex gap-4">
+          <button className="w-fit flex items-center justify-center text-white">
+            <Play className="w-5 h-5 mr-2 bg-transparent" />
+            Trailer
+          </button>
+          <button className="w-fit flex items-center justify-center text-white">
+            <Share className="w-5 h-5 mr-2 bg-transparent" />
+            Share
+          </button>
+        </div>
+
         <div className="flex gap-4 items-center bg-transparent">
           <p className="text-yellow-400 font-bold flex gap-2 bg-transparent">
             <span className="bg-transparent">⭐</span>
             {Number(movieDetails.rating)}
           </p>
-          <div className="rounded-full  w-1 h-1 bg-white" />
-          <p className="text-white shrink-0 bg-transparent">
-            {movieDetails.year}
-          </p>
-          <div className="rounded-full  w-1 h-1 bg-white" />
-          <p className="text-white shrink-0 bg-transparent">
-            {movieDetails.duration} min
-          </p>
+          <div className="rounded-full  w-1 h-1 bg-gray-700" />
+          <p className=" shrink-0 bg-transparent">{movieDetails.year}</p>
+          <div className="rounded-full  w-1 h-1 bg-gray-700" />
+          <p className="shrink-0 bg-transparent">{movieDetails.duration} min</p>
         </div>
-        <div className="text-white">{movieDetails.overview}</div>
+        <p>
+          <span className="font-light">Director : </span>
+          <span className="font-bold">{movieDetails.director}</span>
+        </p>
+        <p className="font-light italic">{movieDetails.tagline}</p>
+        <p className="text-justify">{movieDetails.overview}</p>
       </section>
-      <section className="mt-20 px-8">
+      <section className="my-20 px-8 ml-60">
         <h1>Casts</h1>
-        <div className="flex gap-3 overflow-x-auto mt-4">
+        <div className="flex gap-5 overflow-x-auto mt-4">
           {movieCasts.map((movie) => (
-            <div
-              key={movie.id}
-              className="rounded-full w-25 h-25 bg-white overflow-clip shrink-0"
-            >
-              <img
-                src={`https://image.tmdb.org/t/p/w780/${movie.profile_path}`}
-                alt={movie.name}
-                className="w-full h-full object-cover"
-              />
+            <div className="grid-cols-10 items-center justify-center">
+              <div
+                key={movie.id}
+                className="rounded-full w-25 h-25 bg-white overflow-clip shrink-0 mx-auto"
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w780/${movie.profile_path}`}
+                  alt={movie.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-center">{movie.name}</p>
             </div>
           ))}
         </div>
