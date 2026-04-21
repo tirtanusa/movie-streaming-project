@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tailwind-scrollbar-hide/v4";
-@plugin "flyonui";
 
 @theme {
   --color-bgcolor: #0f0f0f;
@@ -11,7 +10,7 @@
     @apply box-content bg-bgcolor;
   }
   h1 {
-    @apply text-3xl font-bold mb-4 text-white;
+    @apply text-xl font-bold mt-6 text-white;
   }
 
   h2 {
@@ -28,4 +27,8 @@
 
 .genreButton {
   @apply flex items-center rounded-full w-15 border-gray-200 border-2 px-4 py-2 mx-6 my-4 gap-4 cursor-pointer shrink-0;
+}
+
+.swiper-slide {
+  width: auto !important;
 }
